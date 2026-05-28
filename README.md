@@ -18,31 +18,31 @@ graph TD
     classDef api fill:#0984E3,stroke:#fff,stroke-width:2px,color:#fff;
     classDef client fill:#D63031,stroke:#fff,stroke-width:2px,color:#fff;
 
-    USER((Клиенты)):::client -->|WhatsApp, Telegram, Insta, MAX| AGENT
+    USER(("Клиенты")):::client -->|"WhatsApp, Telegram, Insta, MAX"| AGENT
     
     subgraph "Платформа Nextbot: AI-Консультант Олег"
-        AGENT((AI Agent<br>Системный Промпт)):::ai
+        AGENT(("AI Agent<br>Системный Промпт")):::ai
         
         %% Взаимодействие с базой
-        AGENT <-->|Поиск правил и цен (RAG)| KB[(База Знаний VODA)]:::database
+        AGENT <-->|"Поиск правил и цен (RAG)"| KB[("База Знаний VODA")]:::database
         
         %% Блок Function Calling
-        AGENT -->|Анализ намерения| SWITCH{Выбор инструмента}
+        AGENT -->|"Анализ намерения"| SWITCH{"Выбор инструмента"}
         
-        SWITCH -->|Обычный вопрос| CHAT[Формирование ответа]
-        SWITCH -->|Запись на СПА| TOOL_SPA[Function: spa_redirect / spa_services]:::api
-        SWITCH -->|Бронь Отеля/Мероприятия| TOOL_HOTEL[Function: hotel_reservation]:::api
-        SWITCH -->|Покупка билета| TOOL_LINK[Отправка ссылки на оплату]
-        SWITCH -->|Сложный вопрос| TOOL_FALLBACK[Function: send_notification]:::api
+        SWITCH -->|"Обычный вопрос"| CHAT["Формирование ответа"]
+        SWITCH -->|"Запись на СПА"| TOOL_SPA["Function: spa_redirect / spa_services"]:::api
+        SWITCH -->|"Бронь Отеля/Мероприятия"| TOOL_HOTEL["Function: hotel_reservation"]:::api
+        SWITCH -->|"Покупка билета"| TOOL_LINK["Отправка ссылки на оплату"]
+        SWITCH -->|"Сложный вопрос"| TOOL_FALLBACK["Function: send_notification"]:::api
     end
     
     %% Внешние системы
-    TOOL_SPA -.->|Интеграция / Ссылка| YCLIENTS[YClients]:::api
-    TOOL_HOTEL -.->|Создание карточки| CRM[Менеджер / CRM]:::database
-    TOOL_FALLBACK -.->|Алерт| TG[Telegram менеджера]:::api
+    TOOL_SPA -.->|"Интеграция / Ссылка"| YCLIENTS["YClients"]:::api
+    TOOL_HOTEL -.->|"Создание карточки"| CRM[("Менеджер / CRM")]:::database
+    TOOL_FALLBACK -.->|"Алерт"| TG["Telegram менеджера"]:::api
     
-    CHAT -->|Ответ в мессенджер| USER
-    TOOL_LINK -->|Переход на сайт| USER
+    CHAT -->|"Ответ в мессенджер"| USER
+    TOOL_LINK -->|"Переход на сайт"| USER
 ```
 🧠 Архитектура Промпта (System Logic)
 Поведение агента жестко регламентировано системным промптом, который исключает галлюцинации и отклонения от бизнес-целей.
