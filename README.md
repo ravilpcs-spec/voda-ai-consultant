@@ -92,7 +92,7 @@ AI Платформа: Nextbot (Low-code)
 
 Логика: Prompt Engineering, Function Calling, System Instructions
 
-Данные: RAG (Retrieval-Augmented Generation) на основе корпоративной базы знаний.
+Данные: RAG (Retrieval-Augmented Generation) на основе корпоративной базы знаний, дожимные сообщения.
 
 Интеграции: YClients, веб-сайт Акваклуба, внутренняя CRM.
 
